@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Youssef.exe — System Report</title>
+    <style>
+      :root {
+        --green: #65ff9a;
+        --muted: #83a892;
+        --bg: #050b08;
+        --panel: #0b1710;
+        --line: #1c3b29;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: radial-gradient(circle at 50% 0%, #102519 0, #050b08 48%);
+        color: #e4ffec;
+        font:
+          15px/1.6 "Courier New",
+          monospace;
+        min-height: 100vh;
+        padding: 24px;
+      }
+      main {
+        max-width: 850px;
+        margin: 5vh auto;
+        border: 1px solid var(--line);
+        background: rgba(5, 13, 8, 0.94);
+        box-shadow: 0 0 45px #1aff6a12;
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .top {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 13px 18px;
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green);
+        margin-right: 7px;
+        box-shadow: 0 0 10px var(--green);
+      }
+      .content {
+        padding: clamp(22px, 5vw, 48px);
+      }
+      .brand {
+        color: var(--green);
+        font-size: clamp(26px, 6vw, 42px);
+        font-weight: bold;
+        letter-spacing: 2px;
+        margin: 0;
+      }
+      .subtitle {
+        color: var(--muted);
+        margin: 3px 0 28px;
+      }
+      .terminal {
+        background: #020604;
+        border: 1px solid var(--line);
+        border-radius: 9px;
+        padding: 18px;
+        min-height: 220px;
+        color: var(--green);
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+      }
+      .cursor {
+        display: inline-block;
+        width: 9px;
+        height: 17px;
+        background: var(--green);
+        vertical-align: middle;
+        animation: blink 1s steps(2) infinite;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+      button {
+        font: inherit;
+        cursor: pointer;
+        border: 1px solid var(--green);
+        background: #102719;
+        color: var(--green);
+        padding: 13px 20px;
+        border-radius: 7px;
+        margin-top: 18px;
+      }
+      button:hover {
+        background: #183c26;
+        box-shadow: 0 0 18px #65ff9a25;
+      }
+      .hidden {
+        display: none !important;
+      }
+      .report h2 {
+        color: var(--green);
+        font-size: 22px;
+        margin: 0 0 5px;
+      }
+      .version {
+        font-size: 46px;
+        color: var(--green);
+        font-weight: bold;
+        margin: 0;
+      }
+      .small {
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin: 22px 0;
+      }
+      .stat,
+      .warning {
+        border: 1px solid var(--line);
+        background: var(--panel);
+        border-radius: 8px;
+        padding: 13px;
+      }
+      .stat span {
+        display: block;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .stat strong {
+        color: #e4ffec;
+        font-size: 17px;
+      }
+      .section {
+        border-top: 1px solid var(--line);
+        padding-top: 19px;
+        margin-top: 20px;
+      }
+      .warning {
+        margin: 8px 0;
+        color: #d8f5df;
+      }
+      .final {
+        text-align: center;
+        margin: 30px 0 5px;
+        color: var(--green);
+        font-size: clamp(22px, 5vw, 32px);
+        font-weight: bold;
+      }
+      .message {
+        text-align: center;
+        color: #d8f5df;
+        max-width: 560px;
+        margin: 8px auto;
+      }
+      footer {
+        text-align: center;
+        color: #587564;
+        font-size: 11px;
+        padding: 14px;
+        border-top: 1px solid var(--line);
+      }
+      @media (max-width: 520px) {
+        body {
+          padding: 10px;
+        }
+        .grid {
+          grid-template-columns: 1fr;
+        }
+        .top {
+          font-size: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="top">
+        <span><i class="dot"></i> SYSTEM ONLINE</span
+        ><span>CONFIDENTIAL // BIRTHDAY EDITION</span>
+      </div>
+      <div class="content">
+        <section id="intro">
+          <p class="small">PERSONAL SYSTEM DIAGNOSTICS</p>
+          <h1 class="brand">Youssef.EXE</h1>
+          <p class="subtitle">
+            System Report · Birthday Edition · Version 23.0
+          </p>
+          <div class="terminal" id="terminal">
+            > Booting Youssef.exe...\n> Loading personality database...\n>
+            Waiting for user authorization...<span class="cursor"></span>
+          </div>
+          <button id="start">RUN SYSTEM DIAGNOSIS →</button>
+        </section>
+
+        <section id="scan" class="hidden">
+          <p class="small">PLEASE WAIT — SCAN IN PROGRESS</p>
+          <h1 class="brand">ANALYZING...</h1>
+          <div class="terminal" id="scanlog"></div>
+        </section>
+
+        <section id="report" class="report hidden">
+          <p class="small">DIAGNOSTIC COMPLETE // SUBJECT: MY BROTHER</p>
+          <h2>Youssef.EXE</h2>
+          <p class="version">23.0</p>
+          <p class="small">Current system version successfully installed.</p>
+          <div class="section">
+            <h2>SYSTEM SPECIFICATIONS</h2>
+            <div class="grid">
+              <div class="stat">
+                <span>INTELLIGENCE</span
+                ><strong>HIGH — suspiciously high</strong>
+              </div>
+              <div class="stat">
+                <span>HUMOR</span>
+                <strong>Unpredictable</strong>
+              </div>
+              <div class="stat">
+                <span>ANNOYING LEVEL</span>
+                <strong>99.9% — critical</strong>
+              </div>
+              <div class="stat">
+                <span>HELPFULNESS</span>
+                <strong
+                  >Always available
+                  <p>*Response time may vary depending on his mood</p></strong
+                >
+              </div>
+              <div class="stat">
+                <span>FAMILY VALUE</span><strong>PRICELESS ❤️</strong>
+              </div>
+            </div>
+            <!-- <p class="small">
+              *Terms and conditions apply. Usually after being asked more than
+              once.
+            </p> -->
+          </div>
+          <div class="section">
+            <h2>KNOWN SYSTEM BUGS</h2>
+            <div class="warning">
+              [!] Requires repeated requests before executing commands.
+            </div>
+            <div class="warning">
+              [!] Do NOT disturb immediately after booting up.
+            </div>
+            <div class="warning">
+              [!] Replacement not available. Original version is one of a kind.
+            </div>
+          </div>
+          <div class="section">
+            <h2>FINAL SYSTEM STATUS</h2>
+            <p>
+              <span class="dot"></span>
+              ALL SYSTEMS OPERATIONAL · ONE OF A KIND · MUCH LOVED
+            </p>
+          </div>
+          <div class="final">HAPPY 23rd BIRTHDAY! 🎂</div>
+          <p class="message">
+            You are one of the best things in my life. Even with all your bugs,
+            You mean more to me than you'll ever know. ❤️
+          </p>
+          <p class="small" style="text-align: center">
+            Latest update: +1 year, annoying features unchanged. Happy birthday,
+            bro. ❤️
+          </p>
+          <button onclick="location.reload()">↻ RUN DIAGNOSTICS AGAIN</button>
+        </section>
+      </div>
+      <footer>
+        Youssef.exe © Birthday Department · Built with love (and a little
+        debugging)
+      </footer>
+    </main>
+    <script>
+      const start = document.getElementById("start");
+      start.addEventListener("click", () => {
+        document.getElementById("intro").classList.add("hidden");
+        document.getElementById("scan").classList.remove("hidden");
+        const lines = [
+          "> Connecting to brother.exe...",
+          "> Scanning sense of humor........ OK",
+          "> Measuring intelligence......... HIGH",
+          "> Detecting annoying behavior.... FOUND",
+          "> Checking kindness.............. 100%",
+          "> Searching for replacement...... ERROR: IMPOSSIBLE",
+          "> Generating birthday report..... DONE",
+        ];
+        const log = document.getElementById("scanlog");
+        let i = 0;
+        const timer = setInterval(() => {
+          log.textContent += lines[i] + "\n";
+          i++;
+          if (i === lines.length) {
+            clearInterval(timer);
+            setTimeout(() => {
+              document.getElementById("scan").classList.add("hidden");
+              document.getElementById("report").classList.remove("hidden");
+            }, 700);
+          }
+        }, 650);
+      });
+    </script>
+  </body>
+</html>
